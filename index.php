@@ -589,70 +589,43 @@ include "koneksi.php";
     <section id="gallery" class="text-center p-5">
       <div class="container">
         <h1 class="fw-bold display-4 pb-4">Gallery</h1>
-        <div
-          class="border border-2 border-dark rounded shadow-lg overflow-hidden"
-        >
-          <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
+
+        <div class="border border-2 border-dark rounded shadow-lg overflow-hidden">
+          <div id="carouselGallery" class="carousel slide" data-bs-ride="carousel">
+
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  src="img/image.png"
-                  class="d-block w-100"
-                  style="height: 450px; object-fit: cover"
-                  alt="Gallery 1"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="img/download (5).jpeg"
-                  class="d-block w-100"
-                  style="height: 450px; object-fit: cover"
-                  alt="Gallery 2"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="img/download (4).jpeg"
-                  class="d-block w-100"
-                  style="height: 450px; object-fit: cover"
-                  alt="Gallery 3"
-                />
-              </div>
+              <?php
+              $sql = "SELECT * FROM gallery ORDER BY id DESC";
+              $hasil = $conn->query($sql);
+              $active = "active";
+
+              while ($row = $hasil->fetch_assoc()) {
+              ?>
+                <div class="carousel-item <?= $active ?>">
+                  <img src="img/<?= $row['gambar'] ?>"
+                      class="d-block w-100"
+                      style="height: 450px; object-fit: cover">
+                </div>
+              <?php
+                $active = "";
+              }
+              ?>
             </div>
 
-            <!-- Control Buttons -->
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
+            <button class="carousel-control-prev" type="button"
+                    data-bs-target="#carouselGallery" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
             </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
+            <button class="carousel-control-next" type="button"
+                    data-bs-target="#carouselGallery" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
             </button>
+
           </div>
         </div>
       </div>
     </section>
+
 
     <!-- CONTACT -->
     <section id="contact">
